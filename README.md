@@ -2,6 +2,10 @@
 
 On premises caching or micro-CDN solution for Microsoft, Google and Adobe products.
 
+## *This version makes changes to the config to work on Debian-based distros*
+
+*The nginx.conf file included is to be used in Linux distrobutions such as Debian and Ubuntu.*
+
 ## Overview
 
 The Nginx Lancache is an on premise caching solution initially designed for schools, but its application can be used anywhere.
