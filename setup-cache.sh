@@ -75,13 +75,15 @@ DEBIAN_FRONTEND=noninteractive apt install -y curl vim nginx libnginx-mod-stream
 
 if [ $DISTRO = "Debian" ]; then
   UNATTEND_CONF='/etc/apt/apt.conf.d/50unattended-upgrades'
-  sed -i.bkp -e '/Unattended-Upgrade::Origins-Pattern {/ a\        "o=Netdata,l=Netdata";' \
+  sed -i -e '/Unattended-Upgrade::Origins-Pattern {/ a\        "o=Netdata,l=Netdata";' \
     -e '/\/\/\s*"origin=Debian,codename=${distro_codename}-updates";/ s,//\s*,        ,g' \
+    -e '/\/\/Unattended-Upgrade::Automatic-Reboot-Time "02:00";/ s,//,,g' \
     -e 's|//Unattended-Upgrade::Automatic-Reboot "false";|Unattended-Upgrade::Automatic-Reboot "true";|' $UNATTEND_CONF
 elif [ $DISTRO = "Ubuntu" ]; then
   UNATTEND_CONF='/etc/apt/apt.conf.d/50unattended-upgrades'
-  sed -i.bkp -e "/Unattended-Upgrade::Allowed-Origins {/ i\Unattended-Upgrade::Origins-Pattern {\n        \"o=Netdata,l=Netdata\";\n};" \
+  sed -i -e "/Unattended-Upgrade::Allowed-Origins {/ i\Unattended-Upgrade::Origins-Pattern {\n        \"o=Netdata,l=Netdata\";\n};" \
     -e '/\/\/\s*"${distro_id}:${distro_codename}-updates";/ s,//\s*,        ,g' \
+    -e '/\/\/Unattended-Upgrade::Automatic-Reboot-Time "02:00";/ s,//,,g' \
     -e 's|//Unattended-Upgrade::Automatic-Reboot "false";|Unattended-Upgrade::Automatic-Reboot "true";|' $UNATTEND_CONF
 else
   echo "Unable to reliably set up unattended upgrade configuration, exiting."
