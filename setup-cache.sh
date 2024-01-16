@@ -6,7 +6,7 @@ set -e
 
 TZ="US/Eastern"
 NETDATA_URL="https://my-netdata.io/kickstart.sh"
-NGINX_CONF_URL="https://github.com/mcnc-clovett/nginx_lancache/raw/debian/etc/nginx/nginx.conf"
+NGINX_CONF_URL="https://raw.githubusercontent.com/mcnc-clovett/nginx_lancache/debian/etc/nginx/nginx.conf"
 
 # ======================================================================
 # Check if we're running Debian or Ubuntu.
