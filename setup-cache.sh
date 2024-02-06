@@ -68,7 +68,7 @@ DEBIAN_FRONTEND=noninteractive apt update && apt full-upgrade -y
 # ======================================================================
 # Install NGINX and other useful packages
 
-DEBIAN_FRONTEND=noninteractive apt install -y curl vim nginx libnginx-mod-stream unattended-upgrades
+DEBIAN_FRONTEND=noninteractive apt install -y sudo curl vim nginx libnginx-mod-stream unattended-upgrades
 
 # ======================================================================
 # Set up unattended upgrades
