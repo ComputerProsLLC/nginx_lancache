@@ -1,0 +1,30 @@
+// AD Zones
+masters "ad" {
+        # These addresses should be DCs that allow Zone Transfers to this server for the listed zones.
+        192.168.100.100;
+        192.168.100.101;
+};
+
+acl "ad" {
+        # These addresses should be the same as above.
+        192.168.100.100;
+        192.168.100.101;
+};
+
+zone "ad.example.lan" {
+        type slave;
+        file "sec/ad.example.lan";
+        masters { ad; };
+        allow-query { any; };
+        allow-notify { ad; };
+        notify no;
+};
+
+zone "_msdcs.ad.example.lan" {
+        type slave;
+        file "sec/_msdcs.ad.example.lan";
+        masters { ad; };
+        allow-query { any; };
+        allow-notify { ad; };
+        notify no;
+};
