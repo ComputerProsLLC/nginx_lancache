@@ -12,7 +12,8 @@ Sets the IP Address for each caching DNS Zone to <IPAddress>. Set to the IP of y
 [CmdletBinding(DefaultParameterSetName = 'Cache')]
 Param(
     [parameter(ParameterSetName="Emergency")][Switch]$EmergencyShutOff,
-    [parameter(ParameterSetName="Cache",mandatory=$true)][IPAddress]$CacheIp
+    [parameter(ParameterSetName="Cache",mandatory=$true)][IPAddress]$CacheIp,
+    [parameter(ParameterSetName="Cache",mandatory=$false)][switch]$StandaloneDns
 )
 
 $microsoftZones = @(
@@ -70,7 +71,10 @@ else {
     foreach ( $z in $zoneGroup ) {
         try {
             $zone = Get-DnsServerZone -Name $z.Zone -ErrorAction Ignore
-            if ( !$zone ) {
+            if ( !$zone -and $StandaloneDns ) {
+                Add-DnsServerPrimaryZone -Name $z.Zone -ZoneFile "$($z.Zone).dns" -DynamicUpdate None
+            }
+            elseif ( !$zone ) {
                 Add-DnsServerPrimaryZone -Name $z.Zone -ReplicationScope Domain -DynamicUpdate None
             }
         }
