@@ -1,0 +1,10 @@
+services:
+  my_service:
+    build:
+      context: .
+      dockerfile: container/Dockerfile
+    ports:
+      - "80:80"
+      - "19999:19999"
+    volumes:
+      - "c:/users/rstokes/downloads/cache:/var/cache/nginx/cache"
