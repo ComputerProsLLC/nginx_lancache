@@ -2,9 +2,7 @@
 
 On premises caching or micro-CDN solution for Microsoft, Google and Adobe products.
 
-## *This version makes changes to the config to work on Debian-based distros*
-
-*The nginx.conf file included is to be used in Linux distributions such as Debian and Ubuntu.*
+## *This version makes changes to the config to work on alpine-based containers
 
 ## Overview
 
